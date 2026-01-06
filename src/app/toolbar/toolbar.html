@@ -1,0 +1,21 @@
+<div class="toolbar">
+  <button class="menu-icon" (click)="toggleMenu()" aria-label="メニュー">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div class="toolbar-title">Application</div>
+</div>
+
+<div class="burger-menu" [class.open]="isMenuOpen">
+  <nav>
+    <ul>
+      <li><a href="#" (click)="toggleMenu()">アクティビティ</a></li>
+      <li><a href="#" (click)="toggleMenu()">セッティング</a></li>
+    </ul>
+  </nav>
+</div>
+
+@if (isMenuOpen) {
+  <div class="overlay" (click)="toggleMenu()"></div>
+}
