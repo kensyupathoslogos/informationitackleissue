@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "monpromanager"
+  },
+  "targets": {
+    "monpromanager": {
+      "hosting": {
+        "informationtackleissue": [
+          "informationtackleissue"
+        ]
+      }
+    }
+  }
+}

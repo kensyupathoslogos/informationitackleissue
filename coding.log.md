@@ -1,5 +1,15 @@
 # Coding Implementation Log
 
+## 2026-01-07
+
+### 実装内容
+- Firebaseの設定を環境変数から読み込むように修正
+
+### 実装詳細
+- `src/app/app.config.ts`に`environment`をインポート
+- `initializeApp()`の引数をハードコードから`environment.firebaseConfig`に変更
+- Firebase設定を`src/environments/environment.ts`から取得するように統一
+
 ## 2026-01-06
 
 ### 実装内容
