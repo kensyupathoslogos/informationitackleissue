@@ -24,6 +24,27 @@
 - `src/app/app.ts`に`RouterOutlet`をインポートし、importsに追加
 - `src/app/app.html`に`<router-outlet>`を配置
 
+### 実装内容（13:10）
+- Googleアカウント連携のサインイン機能を実装
+- @pathoslogos.co.jpドメイン制限を追加
+- バーガーメニューにサインアウトボタンを設置
+
+### 実装詳細
+- `src/app/signin/signin.ts`にGoogle認証ロジックを実装
+  - Firebase Auth `signInWithPopup`でGoogleサインイン
+  - メールアドレスのドメインチェック（@pathoslogos.co.jpのみ許可）
+  - 不正なドメインの場合は自動サインアウト
+- `src/app/signin/signin.html`にサインインUIを作成
+  - Googleアイコン付きサインインボタン
+  - エラーメッセージ表示機能
+- `src/app/signin/signin.scss`にスタイルを追加
+- `src/app/toolbar/toolbar.ts`に認証状態監視とサインアウト機能を追加
+  - `onAuthStateChanged`で認証状態を監視
+  - サインアウト後は`/signin`へリダイレクト
+- `src/app/toolbar/toolbar.html`にサインアウトボタンを追加
+  - サインイン状態の場合のみ表示
+- `src/app/toolbar/toolbar.scss`にサインアウトボタンのスタイルを追加
+
 ## 2026-01-06
 
 ### 実装内容

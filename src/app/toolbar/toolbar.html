@@ -12,6 +12,13 @@
     <ul>
       <li><a href="#" (click)="toggleMenu()">アクティビティ</a></li>
       <li><a href="#" (click)="toggleMenu()">セッティング</a></li>
+      @if (currentUser) {
+        <li class="signout-item">
+          <button class="signout-btn" (click)="signOut()">
+            サインアウト
+          </button>
+        </li>
+      }
     </ul>
   </nav>
 </div>
