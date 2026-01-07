@@ -2,6 +2,36 @@
 
 ## 2026-01-07
 
+### 実装内容（13:30）
+- GoogleAuthProviderにスコープとドメイン制限を追加
+
+### 実装詳細
+- `src/app/services/auth.service.ts`のGoogleAuthProvider設定を更新
+  - `provider.addScope('email')`: emailスコープを追加
+  - `provider.addScope('profile')`: profileスコープを追加
+  - `provider.setCustomParameters({ hd: 'pathoslogos.co.jp' })`: ドメイン制限を追加
+  - これにより、Googleサインイン時に@pathoslogos.co.jpドメインのアカウントが優先的に表示される
+
+### 実装内容（13:23）
+- auth関連をサービス化
+
+### 実装詳細
+- `ng generate service auth`でAuthServiceを作成
+- `src/app/services/auth.service.ts`に認証ロジックを実装
+  - `signInWithGoogle()`: Googleサインインとドメイン検証
+  - `signOut()`: サインアウト処理
+  - `getCurrentUser()`: 現在のユーザー情報を取得
+  - `isSignedIn()`: サインイン状態を確認
+  - `onAuthStateChanged`で認証状態を監視
+- `src/app/signin/signin.ts`を更新
+  - Firebase Authの直接使用をやめてAuthServiceを利用
+  - コンポーネントのコードを簡潔化
+- `src/app/toolbar/toolbar.ts`を更新
+  - Firebase Authの直接使用をやめてAuthServiceを利用
+  - OnInitを削除（サービス内で認証状態を監視）
+- `src/app/toolbar/toolbar.html`を更新
+  - `currentUser`から`authService.currentUser`に変更
+
 ### 実装内容（13:18）
 - activityページを作成
 - サインイン後にactivityページへ遷移するように変更

@@ -22,6 +22,11 @@ export class AuthService {
   async signInWithGoogle(): Promise<{ success: boolean; user?: User; error?: string }> {
     try {
       const provider = new GoogleAuthProvider();
+      provider.addScope('email');
+      provider.addScope('profile');
+      provider.setCustomParameters({
+        hd: 'pathoslogos.co.jp',
+      });
       const result = await signInWithPopup(this.auth, provider);
       const user = result.user;
 
