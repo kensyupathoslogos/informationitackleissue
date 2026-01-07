@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './signin.scss',
 })
 export class Signin {
-  private auth = inject(Auth);
+  private authService = inject(AuthService);
   private router = inject(Router);
   errorMessage = '';
   isLoading = false;
@@ -19,25 +19,16 @@ export class Signin {
     this.errorMessage = '';
     this.isLoading = true;
 
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(this.auth, provider);
-      const user = result.user;
+    const result = await this.authService.signInWithGoogle();
 
-      // Check if email ends with @pathoslogos.co.jp
-      if (user.email && user.email.endsWith('@pathoslogos.co.jp')) {
-        // Sign-in successful
-        this.router.navigate(['/activity']);
-      } else {
-        // Invalid domain - sign out the user
-        await this.auth.signOut();
-        this.errorMessage = '@pathoslogos.co.jpのメールアドレスのみ使用できます。';
-      }
-    } catch (error: any) {
-      console.error('Sign-in error:', error);
-      this.errorMessage = 'サインインに失敗しました。もう一度お試しください。';
-    } finally {
-      this.isLoading = false;
+    if (result.success) {
+      // Sign-in successful
+      this.router.navigate(['/activity']);
+    } else {
+      // Sign-in failed
+      this.errorMessage = result.error || 'サインインに失敗しました。';
     }
+
+    this.isLoading = false;
   }
 }

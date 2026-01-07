@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Auth, User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,18 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
 })
-export class Toolbar implements OnInit {
-  private auth = inject(Auth);
+export class Toolbar {
   private router = inject(Router);
+  authService = inject(AuthService);
   isMenuOpen = false;
-  currentUser: User | null = null;
-
-  ngOnInit() {
-    // Monitor authentication state
-    this.auth.onAuthStateChanged((user) => {
-      this.currentUser = user;
-    });
-  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -28,7 +20,7 @@ export class Toolbar implements OnInit {
 
   async signOut() {
     try {
-      await this.auth.signOut();
+      await this.authService.signOut();
       this.toggleMenu();
       this.router.navigate(['/signin']);
     } catch (error) {
