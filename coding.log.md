@@ -2,27 +2,17 @@
 
 ## 2026-01-07
 
-### 実装内容（12:01）
-- Firebaseの設定を環境変数から読み込むように修正
+### 実装内容（13:18）
+- activityページを作成
+- サインイン後にactivityページへ遷移するように変更
 
 ### 実装詳細
-- `src/app/app.config.ts`に`environment`をインポート
-- `initializeApp()`の引数をハードコードから`environment.firebaseConfig`に変更
-- Firebase設定を`src/environments/environment.ts`から取得するように統一
-
-### 実装内容（最新）
-- signinページを作成
-- /signinルーティングの設定
-- rootにアクセスされたらsigninにページ遷移するように設定
-
-### 実装詳細
-- `ng generate component signin`でsigninコンポーネント生成
-- `src/app/app.routes.ts`を作成し、ルーティング設定を追加
-  - ルートパス('')を'/signin'にリダイレクト
-  - '/signin'パスにSigninコンポーネントを割り当て
-- `src/app/app.config.ts`に`provideRouter(routes)`を追加
-- `src/app/app.ts`に`RouterOutlet`をインポートし、importsに追加
-- `src/app/app.html`に`<router-outlet>`を配置
+- `ng generate component activity`でactivityコンポーネント生成
+- `src/app/app.routes.ts`に`/activity`ルートを追加
+  - Activityコンポーネントをインポート
+  - `/activity`パスの設定を追加
+- `src/app/signin/signin.ts`のリダイレクト先を`/activity`に変更
+  - サインイン成功時のナビゲート先を`/`から`/activity`に更新
 
 ### 実装内容（13:10）
 - Googleアカウント連携のサインイン機能を実装
@@ -44,6 +34,28 @@
 - `src/app/toolbar/toolbar.html`にサインアウトボタンを追加
   - サインイン状態の場合のみ表示
 - `src/app/toolbar/toolbar.scss`にサインアウトボタンのスタイルを追加
+
+### 実装内容（12:01）
+- Firebaseの設定を環境変数から読み込むように修正
+
+### 実装詳細
+- `src/app/app.config.ts`に`environment`をインポート
+- `initializeApp()`の引数をハードコードから`environment.firebaseConfig`に変更
+- Firebase設定を`src/environments/environment.ts`から取得するように統一
+
+### 実装内容（最新）
+- signinページを作成
+- /signinルーティングの設定
+- rootにアクセスされたらsigninにページ遷移するように設定
+
+### 実装詳細
+- `ng generate component signin`でsigninコンポーネント生成
+- `src/app/app.routes.ts`を作成し、ルーティング設定を追加
+  - ルートパス('')を'/signin'にリダイレクト
+  - '/signin'パスにSigninコンポーネントを割り当て
+- `src/app/app.config.ts`に`provideRouter(routes)`を追加
+- `src/app/app.ts`に`RouterOutlet`をインポートし、importsに追加
+- `src/app/app.html`に`<router-outlet>`を配置
 
 ## 2026-01-06
 

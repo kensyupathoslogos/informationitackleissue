@@ -27,7 +27,7 @@ export class Signin {
       // Check if email ends with @pathoslogos.co.jp
       if (user.email && user.email.endsWith('@pathoslogos.co.jp')) {
         // Sign-in successful
-        this.router.navigate(['/']);
+        this.router.navigate(['/activity']);
       } else {
         // Invalid domain - sign out the user
         await this.auth.signOut();
