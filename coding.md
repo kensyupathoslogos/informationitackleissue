@@ -1,1 +1,2 @@
-firebaseを導入しています。/src/environments/environment.tsの内容を用いてapp.config.tsの内容を修正してください。
+signinページを作成してください。
+/signinルーティングの設定をして、rootにアクセスされたらsigninにページ遷移するようにしてください。
